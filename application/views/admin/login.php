@@ -27,13 +27,20 @@
         <div class="login-box-body">
             <p class="login-box-msg">Introduzca sus datos de ingreso</p>
 
-            <form action="../../index2.html" method="post">
+            <?php 
+            if($this->session->flashdata('error')) { ?>
+              <div class="alert alert-danger">
+                <p><?php echo $this->session->flashdata('error'); ?></p>
+              </div>
+            <?php } ?>
+
+            <form action="<?php echo base_url();?>auth/login" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="Usuario">
+                    <input type="text" class="form-control" placeholder="Usuario" name="username">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">
