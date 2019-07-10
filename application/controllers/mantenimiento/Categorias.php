@@ -81,5 +81,24 @@ class Categorias extends CI_Controller {
 			redirect(base_url()."mantenimiento/categoria/edit/".$id_categoria);
 		}
 	}
+
+	public function view($id = '')
+	{
+		$data = array(
+			'categoria' => $this->Categorias_model->get_categoria($id),
+			);
+
+		$this->load->view('admin/categorias/view', $data);
+	}
+
+	public function delete($id = '')
+	{
+		$data = array(
+			'estado' => '0',
+			);
+
+		$this->Categorias_model->update($id, $data);
+		echo "mantenimiento/categorias";
+	}
 }
 ?>
