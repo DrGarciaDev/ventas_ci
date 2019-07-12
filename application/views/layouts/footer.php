@@ -35,18 +35,20 @@ $(document).ready(function () {
         //alert("eliminando");
         //Obtiene la ruta que se le dio en la vista list
         var ruta = $(this).attr("href");
-        $.ajax({
-            url: ruta,
-            type: "POST",
-            success:function(resp){
-                //alert(resp);
-                // redirijo sin poderse devolver
-                window.location.replace(base_url + resp);
+        if (confirm("Realmente deseas eliminar la categoria ? ") ) {
+            $.ajax({
+                url: ruta,
+                type: "POST",
+                success:function(){
+                    //alert(resp);
+                    // redirijo sin poderse devolver
+                    window.location.replace(base_url + "mantenimiento/categorias");
 
-                // redirección normal
-                //window.location.href = base_url + resp;
-            }
-        });
+                    // redirección normal
+                    //window.location.href = base_url + resp;
+                }
+            });
+        }
     });
 
     $(".btn-view").on("click", function(){
@@ -80,7 +82,7 @@ $(document).ready(function () {
         }
     });
 	$('.sidebar-menu').tree();
-})
+});
 </script>
 </body>
 </html>

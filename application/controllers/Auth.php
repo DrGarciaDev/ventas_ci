@@ -29,6 +29,9 @@ class Auth extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 
+		$this->security->xss_clean( $this->db->escape_str($username) );
+		$this->security->xss_clean( $this->db->escape_str($password) );
+
 		$res = $this->Usuarios_model->login($username, sha1($password));
 
 		if (!$res) {
