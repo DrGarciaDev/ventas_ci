@@ -34,19 +34,19 @@ class Auth extends CI_Controller {
 
 		$res = $this->Usuarios_model->login($username, sha1($password));
 
-		if (!$res) {
-			$this->session->set_flashdata('error', 'El usuario y/o contraseña son erroneos');
-			redirect(base_url());
-		}
-		else{
+		if ($res && $res->estado) {
 			$data = array (
 				'id' => $res->id,
-				'nombre' => $res->nombre,
+				'nombres' => $res->nombres,
 				'rol' => $res->rol_id,
 				'login' => TRUE
 				);
 			$this->session->set_userdata($data);
 			redirect(base_url().'dashboard');
+		}
+		else{
+			$this->session->set_flashdata('error', 'Usuario inactivo y/o usuario y/o contraseña son erroneos');
+			redirect(base_url());
 		}
 	}
 
